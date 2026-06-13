@@ -14,12 +14,24 @@ npm run lint      # run ESLint across all JS/JSX files
 
 ## Architecture
 
-This is a single-page React app with no routing, no backend, and no state management library. All state lives in `App.jsx` via `useState`.
+Single-page React app with no routing, no backend, and no state management library.
 
-**Data model** — each transaction has: `id`, `description`, `amount` (string), `type` (`"income"` | `"expense"`), `category`, `date`.
+**Component tree:**
+```
+App
+├── Summary          — receives transactions, computes and displays income/expenses/balance
+├── TransactionForm  — owns its own form state, calls onAdd(transaction) prop when submitted
+└── TransactionList  — owns filter state, receives transactions and renders the filtered table
+```
 
-**Known bugs in the starter code (intentional — this is a course project):**
-- `amount` is stored as a string, so `reduce` produces string concatenation instead of numeric sums — totals and balance are wrong.
+**State ownership:**
+- `transactions` array lives in `App` and is the single source of truth
+- Form field state (description, amount, type, category) lives in `TransactionForm`
+- Filter state (filterType, filterCategory) lives in `TransactionList`
+
+**Data model** — each transaction has: `id`, `description`, `amount` (number), `type` (`"income"` | `"expense"`), `category`, `date` (YYYY-MM-DD string).
+
+**Known issue in starter data (intentional — this is a course project):**
 - One seed transaction ("Freelance Work") is typed `"expense"` but categorized `"salary"` — inconsistent data.
 - CSS defines `.delete-btn` but no delete button exists in the JSX yet.
 
