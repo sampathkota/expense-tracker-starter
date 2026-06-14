@@ -314,6 +314,21 @@
   border-color: #FECDD3;
 }
 
+/* ── Empty state ────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  color: var(--text-2);
+  font-size: 14px;
+  padding: 24px;
+}
+
+/* ── Delete confirm state ───────────────────────── */
+.delete-btn--confirm {
+  background: var(--expense-subtle);
+  color: var(--expense);
+  border-color: #FECDD3;
+}
+
 /* ── Responsive ─────────────────────────────────── */
 @media (max-width: 600px) {
   .summary { grid-template-columns: 1fr; }
@@ -325,4 +340,5 @@
   .add-transaction form button { grid-column: 1 / -1; }
 
   .transactions-header { flex-direction: column; align-items: flex-start; }
+  .transactions { overflow-x: auto; }
 }
